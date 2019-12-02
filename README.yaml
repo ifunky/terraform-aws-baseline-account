@@ -1,0 +1,70 @@
+---
+#
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: terraform-aws-baseline-account
+title: AWS Common Account Baseline
+
+# Build Badges
+badges:
+  - name: "Build Status"
+    image: "https://circleci.com/gh/ifunky/terraform-aws-baseline-acount.svg?style=svg"
+    url: "https://circleci.com/gh/ifunky/terraform-aws-baseline-account"
+
+description: |-
+  Create baseline common AWS account settings that are applied to every account in the organisation.   This tyically includes config like IAM roles, S3 buckets and general settings.
+
+  ## Features
+
+  ### Account Cost Saving -> EC2 Scheduling
+
+  - Lambda function for scheduling start/stop of EC2 and RDS instances
+
+  ### Identity and Access Management
+
+  - Creates a ReadOnly role
+  - Creates a Terraform role which is designed to be used by an automation pipeline
+
+  ### S3 Buckets
+  - Creates an audit bucket for S3 access logs
+
+  ### KMS Key For Sensitive Data
+  - A KMS key is created specifcally to enable Terraform to decrypt any sensitive data required for resources which require passwords
+
+  ## EC2 Instance Scheduling
+  Each account comes with the ablilty to tag EC2 instances in order to save costs by automatically stopping and starting at predefined schedules each day.
+  By default EC2 instances will be stopped at 18:00 with no start time.  If you need a server running you can use the AWS Console to start instances again when you need them.
+
+  For more information see here: https://github.com/neillturner/terraform-aws-lambda-scheduler/
+
+# How to use this project
+usage: |-
+  ```hcl
+  module "account" {
+  source = "git::https://github.com/ifunky/terraform-aws-baseline-account.git?ref=master"
+
+    company             = "iFunky"
+    environment         = "playground"
+    stage               = "dev"
+    security_account_id = var.security_account_id
+
+    tags = {
+      Terraform = "true"
+    }
+  }
+  ```
+# Include output from terraform-module-inspect
+include:
+  - "docs/targets.md"
+  - "docs/metadata.md"
+
+# List of useful related projects/links
+related:
+  - name: "PolyDev"
+    description: "PolyDev repo and setup guide"
+    url: "https://github.com/ifunky/polydev"  
+  - name: "Terraform Lambda EC2 Scheduler"
+    description: "Terraform Lambda EC2 Scheduler"
+    url: "https://github.com/neillturner/terraform-aws-lambda-scheduler"

@@ -1,0 +1,20 @@
+<!-- Auto generated file -->
+{{- defineDatasource "config" "README.yaml" | regexp.Replace ".*" "" -}}
+{{- defineDatasource "includes" .Env.README_INCLUDES | regexp.Replace ".*" "" }}
+
+# {{(ds "config").title}}{{ if gt (len (ds "config").title) 34 }}{{ print "\n\n" }}{{ end }}
+{{ if has (ds "config") "badges" }}{{- range $badge := (ds "config").badges -}}{{ printf " [![%s](%s)](%s)" $badge.name $badge.image $badge.url }}{{ end }}{{ end }}
+{{ if has (ds "config") "description" }}
+{{(ds "config").description }}
+{{ end }}
+
+{{ if has (ds "config") "usage" }}
+## Usage
+{{ (ds "config").usage -}}
+{{ end }}
+
+{{ if has (ds "config") "include" }}
+{{ range $file := (datasource "config").include -}}
+{{ (include "includes" $file) }}
+{{- end }}
+{{- end }}
