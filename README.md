@@ -1,7 +1,7 @@
 <!-- Auto generated file -->
 
 # AWS Common Account Baseline
- [![Build Status](https://circleci.com/gh/ifunky/terraform-aws-baseline-acount.svg?style=svg)](https://circleci.com/gh/ifunky/terraform-aws-baseline-account)
+ [![Build Status](https://circleci.com/gh/ifunky/terraform-aws-baseline-account.svg?style=svg)](https://circleci.com/gh/ifunky/terraform-aws-baseline-account) [![Latest Version](https://img.shields.io/github/release/ifunky/terraform-aws-baseline-account.svg)](https://github.com/ifunky/terraform-aws-baseline-account/releases)
 
 Create baseline common AWS account settings that are applied to every account in the organisation.   This tyically includes config like IAM roles, S3 buckets and general settings.
 
