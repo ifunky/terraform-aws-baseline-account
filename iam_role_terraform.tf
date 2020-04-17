@@ -13,7 +13,8 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "terraform" {
-  name                 = "terraform"
+  count                = var.iam_create_terraform_role ? 1 : 0
+  name                 = var.iam_terraform_role_name
   description          = "Role that can be assumed by the administration account for Terraform automation"
   path                 = "/service-accounts/"
   max_session_duration = "3600"
@@ -23,6 +24,7 @@ resource "aws_iam_role" "terraform" {
 }
 
 resource "aws_iam_role_policy_attachment" "teraform_policy" {
-  role       = aws_iam_role.terraform.name
+  count      = var.iam_create_terraform_role ? 1 : 0
+  role       = aws_iam_role.terraform[count.index].name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }

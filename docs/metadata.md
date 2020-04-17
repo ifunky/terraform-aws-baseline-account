@@ -12,6 +12,9 @@ Provider Requirements:
 * `audit_s3_access_bucket_name` (default `"audit-s3-logs"`): Bucket name used for S3 access audit logging
 * `delimiter` (default `"-"`): Delimiter to be used between `name`, `namespace`, `stage`, etc.
 * `environment` (required): Environment or product (e.g. `playground`, `shared`, `organisation`)
+* `iam_create_readonly_role` (default `true`): Create readonly role or not
+* `iam_create_terraform_role` (default `true`): Create Terraform role or not
+* `iam_terraform_role_name` (default `"terraform"`): Terraform role name (used in automation tools)
 * `kms_key_id` (required): AWS KMS master key ID used for SSE-KMS encryption. The default AWS/S3 AWS KMS master key is used if this element is absent
 * `kms_terraform_principles` (required): List of IAM principles that are authorised to encrypt/decrypt secrets
 * `namespace` (required): Namespace - typically the company name (e.g. `MyCorp`)

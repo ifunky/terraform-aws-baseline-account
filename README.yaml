@@ -48,10 +48,11 @@ usage: |-
   module "account" {
   source = "git::https://github.com/ifunky/terraform-aws-baseline-account.git?ref=master"
 
-    company             = "iFunky"
-    environment         = "playground"
-    stage               = "dev"
-    security_account_id = var.security_account_id
+    company                  = "iFunky"
+    environment              = "playground"
+    iam_terraform_role_name  = "terraform"
+    stage                    = "dev"
+    security_account_id      = var.security_account_id
 
     tags = {
       Terraform = "true"

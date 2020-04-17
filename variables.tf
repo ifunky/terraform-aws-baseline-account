@@ -39,6 +39,23 @@ variable "audit_s3_access_bucket_name" {
   default     = "audit-s3-logs"
 }
 
+variable "iam_create_readonly_role" {
+  type        = bool
+  description = "Create readonly role or not"
+  default     = true
+}
+
+variable "iam_create_terraform_role" {
+  type        = bool
+  description = "Create Terraform role or not"
+  default     = true
+}
+
+variable "iam_terraform_role_name" {
+  description = "Terraform role name (used in automation tools)"
+  default     = "terraform"
+}
+
 variable "kms_key_id" {
   description = "AWS KMS master key ID used for SSE-KMS encryption. The default AWS/S3 AWS KMS master key is used if this element is absent"
   default     = ""

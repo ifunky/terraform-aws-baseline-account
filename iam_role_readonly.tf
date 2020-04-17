@@ -12,6 +12,7 @@ data "aws_iam_policy_document" "readonly_assume_role" {
 }
 
 resource "aws_iam_role" "readonly" {
+  count                = var.iam_create_readonly_role ? 1 : 0
   name                 = "readonly"
   description          = "Role that can be assumed with only limited readonly access to this accounts resources"
   path                 = "/"
@@ -22,6 +23,7 @@ resource "aws_iam_role" "readonly" {
 }
 
 resource "aws_iam_role_policy_attachment" "readonly_policy" {
-  role       = aws_iam_role.readonly.name
+  count      = var.iam_create_readonly_role ? 1 : 0
+  role       = aws_iam_role.readonly[count.index].name
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
