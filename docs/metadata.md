@@ -1,10 +1,10 @@
 # Module Specifics
 
 Core Version Constraints:
-* `~> 0.12.2`
+* `>= 0.13.5`
 
 Provider Requirements:
-* **aws:** `~> 2.16`
+* **aws:** (any version)
 
 ## Input Variables
 * `attributes` (required): Additional attributes (e.g. `1`)
@@ -15,6 +15,7 @@ Provider Requirements:
 * `iam_create_readonly_role` (default `true`): Create readonly role or not
 * `iam_create_terraform_role` (default `true`): Create Terraform role or not
 * `iam_terraform_role_name` (default `"terraform"`): Terraform role name (used in automation tools)
+* `kms_create_secrets` (required): Create a KMS key for Terraform (used for sensitive data in resources)
 * `kms_key_id` (required): AWS KMS master key ID used for SSE-KMS encryption. The default AWS/S3 AWS KMS master key is used if this element is absent
 * `kms_terraform_principles` (required): List of IAM principles that are authorised to encrypt/decrypt secrets
 * `namespace` (required): Namespace - typically the company name (e.g. `MyCorp`)
@@ -48,4 +49,12 @@ Provider Requirements:
 
 ## Child Modules
 * `audit_access_s3_label` from `git::https://github.com/cloudposse/terraform-null-label.git?ref=master`
+
+## Problems
+
+## Error: Unsuitable value type
+
+(at `versions.tf` line 5)
+
+Unsuitable value: string required
 

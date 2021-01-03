@@ -6,7 +6,7 @@ TARGETS_DOCS_FILE  := "docs/targets.md"
 export README_INCLUDES ?= $(file://$(shell pwd)/?type=text/plain)
 
 define polydev
-	@docker run -it \
+	@docker run -it --rm \
 		--env AWS_DEFAULT_REGION="eu-west-1" \
 		--user "$$(id -u):$$(id -g)" \
 		-v "$$PWD:/data" \
@@ -33,7 +33,7 @@ createdocs/targets: # Create list of make targets in Markdown format
 	@echo '```' >> $(TARGETS_DOCS_FILE)
 
 createdocs: createdocs/targets # Auto create README.md documentaion
-	@terraform-config-inspect > $(METADATA_DOCS_FILE)
+	@terraform-config-inspect > $(METADATA_DOCS_FILE) || true
 	@sed -i -e '1,2d' $(METADATA_DOCS_FILE)   				# Remove first line as not needed
 	@sed -i '1i# Module Specifics' $(METADATA_DOCS_FILE)	# Add title to first line
 	@gomplate --file ./docs/README.md.template \

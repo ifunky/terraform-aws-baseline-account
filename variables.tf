@@ -56,6 +56,12 @@ variable "iam_terraform_role_name" {
   default     = "terraform"
 }
 
+variable "kms_create_secrets" {
+  type        = bool
+  description = "Create a KMS key for Terraform (used for sensitive data in resources)"
+  default     = false
+}
+
 variable "kms_key_id" {
   description = "AWS KMS master key ID used for SSE-KMS encryption. The default AWS/S3 AWS KMS master key is used if this element is absent"
   default     = ""

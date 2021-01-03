@@ -29,6 +29,6 @@ output "s3_auditaccess_bucket_arn" {
 }
 
 output "kms_teraform_key_id" {
-  value       = aws_kms_key.terraform_secrets.key_id
+  value       = var.kms_create_secrets ? join("", aws_kms_key.terraform_secrets.*.key_id) : ""    
   description = "Terraform secrets KMS key ID"
 }

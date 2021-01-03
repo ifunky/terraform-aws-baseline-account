@@ -20,7 +20,7 @@ Create baseline common AWS account settings that are applied to every account in
 - Creates an audit bucket for S3 access logs
 
 ### KMS Key For Sensitive Data
-- A KMS key is created specifcally to enable Terraform to decrypt any sensitive data required for resources which require passwords
+- An optional KMS key is created specifcally to enable Terraform to decrypt any sensitive data required for resources which require passwords
 
 ## EC2 Instance Scheduling
 Each account comes with the ablilty to tag EC2 instances in order to save costs by automatically stopping and starting at predefined schedules each day.
@@ -38,6 +38,7 @@ source = "git::https://github.com/ifunky/terraform-aws-baseline-account.git?ref=
   company                  = "iFunky"
   environment              = "playground"
   iam_terraform_role_name  = "terraform"
+  kms_create_secrets       = true
   stage                    = "dev"
   security_account_id      = var.security_account_id
 
@@ -62,10 +63,10 @@ polydev                        Run PolyDev interactive shell to start developing
 # Module Specifics
 
 Core Version Constraints:
-* `~> 0.12.2`
+* `>= 0.13.5`
 
 Provider Requirements:
-* **aws:** `~> 2.16`
+* **aws:** (any version)
 
 ## Input Variables
 * `attributes` (required): Additional attributes (e.g. `1`)
@@ -76,6 +77,7 @@ Provider Requirements:
 * `iam_create_readonly_role` (default `true`): Create readonly role or not
 * `iam_create_terraform_role` (default `true`): Create Terraform role or not
 * `iam_terraform_role_name` (default `"terraform"`): Terraform role name (used in automation tools)
+* `kms_create_secrets` (required): Create a KMS key for Terraform (used for sensitive data in resources)
 * `kms_key_id` (required): AWS KMS master key ID used for SSE-KMS encryption. The default AWS/S3 AWS KMS master key is used if this element is absent
 * `kms_terraform_principles` (required): List of IAM principles that are authorised to encrypt/decrypt secrets
 * `namespace` (required): Namespace - typically the company name (e.g. `MyCorp`)

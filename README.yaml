@@ -34,7 +34,7 @@ description: |-
   - Creates an audit bucket for S3 access logs
 
   ### KMS Key For Sensitive Data
-  - A KMS key is created specifcally to enable Terraform to decrypt any sensitive data required for resources which require passwords
+  - An optional KMS key is created specifcally to enable Terraform to decrypt any sensitive data required for resources which require passwords
 
   ## EC2 Instance Scheduling
   Each account comes with the ablilty to tag EC2 instances in order to save costs by automatically stopping and starting at predefined schedules each day.
@@ -51,6 +51,7 @@ usage: |-
     company                  = "iFunky"
     environment              = "playground"
     iam_terraform_role_name  = "terraform"
+    kms_create_secrets       = true
     stage                    = "dev"
     security_account_id      = var.security_account_id
 
