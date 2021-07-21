@@ -4,7 +4,7 @@ output "iam_readonly_role" {
 }
 
 output "iam_terraform_role" {
-  value       = join("", aws_iam_role.terraform.*) 
+  value       = var.iam_create_terraform_role ? aws_iam_role.terraform[0] : "" 
   description = "IAM Terraform role"
 }
 
