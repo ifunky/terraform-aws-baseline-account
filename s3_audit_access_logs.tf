@@ -1,5 +1,5 @@
 module "audit_access_s3_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=master"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.22.0"
   enabled    = var.audit_access_logs_create
   namespace  = var.namespace
   environment= var.environment

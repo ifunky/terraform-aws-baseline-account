@@ -4,8 +4,8 @@ output "iam_readonly_role" {
 }
 
 output "iam_terraform_role" {
-  value       = aws_iam_role.terraform
-  description = "IAM Terraform group ID"
+  value       = join("", aws_iam_role.terraform.*) 
+  description = "IAM Terraform role"
 }
 
 output "s3_auditaccess" {
