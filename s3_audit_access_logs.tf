@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "audit_access_logs" {
         }
     }
 
-  tags = merge(map( "Name", var.audit_s3_access_bucket_name), var.tags)
+  tags = merge(tomap({ "Name" = var.audit_s3_access_bucket_name}), var.tags)
 }
 
 resource "aws_s3_bucket_public_access_block" "audit_s3_access" {

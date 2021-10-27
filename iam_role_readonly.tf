@@ -19,7 +19,7 @@ resource "aws_iam_role" "readonly" {
   max_session_duration = "3600"
   assume_role_policy = data.aws_iam_policy_document.readonly_assume_role.json
 
-  tags = merge(map( "Name", "terraform"), var.tags )
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "readonly_policy" {

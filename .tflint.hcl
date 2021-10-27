@@ -1,7 +1,11 @@
 config {
   module = true
-  deep_check = false
   force = false
+}
+
+plugin "aws" {
+  enabled = true
+  deep_check = false
 }
 
 rule "terraform_module_pinned_source" {
