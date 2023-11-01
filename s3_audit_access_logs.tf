@@ -19,7 +19,8 @@ resource "aws_s3_bucket" "audit_access_logs" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "audit_access_logs" {
-  bucket = aws_s3_bucket.audit_access_logs.id
+  count         = var.audit_access_logs_create ? 1 : 0  
+  bucket        = aws_s3_bucket.audit_access_logs[count.index].id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -30,7 +31,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "audit_access_logs
 }
 
 resource "aws_s3_bucket_ownership_controls" "audit_access_logs" {
-  bucket = aws_s3_bucket.audit_access_logs.id
+  count         = var.audit_access_logs_create ? 1 : 0  
+  bucket        = aws_s3_bucket.audit_access_logs[count.index].id
   rule {
     object_ownership = "ObjectWriter"
   }
